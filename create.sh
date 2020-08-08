@@ -9,7 +9,7 @@ while [ $flag -eq 1 ]
 do
 if [[ $name =~ ^[a-zA-Z]+$ ]]
 then
-mkdir $name 2>errors.txt
+mkdir $name 2>$1/errors.txt
 	if [ $? -eq 0 ]
 	then
 	flag=0
