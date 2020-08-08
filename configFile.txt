@@ -1,0 +1,2 @@
+Current Working Directory:/home/yara/DBSearchEngine
+Current Working Space:/home/yara/DBSearchEngine/Databases
