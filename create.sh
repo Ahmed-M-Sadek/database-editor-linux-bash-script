@@ -1,32 +1,34 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-echo "Creating a new database"
-echo "Please enter a name for the database"
-read dbname
-if [ ! -d "./Databases" ]
-then
-	echo "directory does not exist"
-	mkdir Databases
-fi
-cd ./Databases
-touch  $dbname
-echo "enter field names ('exit' to save)"
-read localinput
-while [ -z "$localinput" ] || [ "$localinput" == "exit" ]
+# =================================================
+# CREATE NEW DATABASE DIRECTORY
+
+echo "Creating a new Database"
+flag = 1
+
+while [ $flag -eq 1 ]
 do
-echo "at least one field should be specified"
-read localinput
+	echo "Enter a name for the new database"
+	echo "C/c to cancel"
+	read dbname
+
+	if [ -d ./$dbname ]
+	then
+	echo "Database name already exists"
+
+	elif [[ "$dbname" =~ [C,c] ]]
+	then
+	break
+
+	else
+	mkdir $dbname
+	flag = 0
+	fi
+
+	sleep 2
+	clear
 done
-echo -n $localinput >> $dbname
-read localinput
-while [ "$localinput" != "exit" ]
-do
-if [ -n "$localinput" ]
-then
-echo -n ":$localinput" >> $dbname
-else
-echo "field name can not be empty"
-fi
-read localinput
-done
-echo >> $dbname
+
+# ==================================================
+# CALL OPEN DATABASE SCRIPT
+
