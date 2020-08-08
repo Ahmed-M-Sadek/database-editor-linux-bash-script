@@ -10,7 +10,7 @@ mySpace=$(awk -F: '{if(NR == 2){print $2}}' ./configFile.txt)
 
 myDirectory=$(awk -F: '{if(NR == 1){print $2}}' ./configFile.txt)
 # ====================================================================
-# CREAT DEAFULT DIRECTORY
+# CREATE DEFAULT DIRECTORY
 
 if [ ! -d "./Databases" ]
 then
@@ -69,20 +69,25 @@ choices=(
 "Open DB"
 "List existing DBs"
 "Exit")
+
 PS3='Enter your choice: '
+
 select choice in  ${choices[@]}
 do
 case $REPLY in
 	1) echo "$choice ... "
-	   break;;
+	   sleep 1
+	   ../create.sh
+	   ;;
 	2) echo "$choice ... "
-	  break;;
+	  ;;
 	3) echo "$choice ... "
-          break;;
+          ;;
 	4) echo "$choice ... "
-          break;;
+          ;;
 	5) echo "$choice ... "
-          break;;
+          ;;
 	*) echo "Wrong choice, try again"
 esac
+REPLY=
 done
