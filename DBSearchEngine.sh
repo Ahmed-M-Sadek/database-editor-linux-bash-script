@@ -77,7 +77,7 @@ do
 case $REPLY in
 	1) echo "$choice ... "
 	   sleep 1
-	   ../create.sh
+	   $myDirectory/create.sh
 	   ;;
 	2) echo "$choice ... "
 	  ;;
