@@ -6,6 +6,9 @@ choices=(
 "Integer"
 "String")
 
+#===================================================
+# Creating Table file
+
 clear
 echo "Enter a name for the new table"
 read tableName
@@ -13,6 +16,9 @@ sleep 0.5
 clear
 
 touch $tableName
+
+#===================================================
+# Checking number of table columns
 
 echo "Enter the number of columns"
 read cnumber
@@ -23,6 +29,9 @@ do
 	read cnumber
 done
 echo $cnumber > $tableName
+
+#===================================================
+# Adding Primary key value and datatype
 
 echo "Enter the primary key for the database"
 read localPK
@@ -40,6 +49,8 @@ done
 echo -n "$localtype" >> $tableName
 fields+="$localPK"
 
+#===================================================
+# Adding the rest of the columns
 
 for (( i=2; i<=$cnumber; i++ ))
 do
