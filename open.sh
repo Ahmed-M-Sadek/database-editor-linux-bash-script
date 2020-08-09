@@ -1,8 +1,39 @@
-#!/bin/bash
+#! /bin/bash
 
-echo "Currently working with $1"
+source $myDirectory/essentials.sh
+emptyflag=5
+checkEmptyDirectory $mySpace
 
-IFS="|"
+if [ $emptyFlag -eq 0 ]
+then
+
+myString=" Existing DBs are: "
+printInSquare $myString ${#myString}
+tput setaf 4
+tput bold
+ls -1 $mySpace
+tput sgr0
+
+echo "Kindly enter DB to open: "
+tput sc
+read DBName
+
+until [ -d "$DBName" ]
+do
+echo "$DBName doesn't exist!"
+sleep 1
+tput rc
+tput ed
+tput sc 
+read DBName
+done
+
+clear
+
+echo "Currently working with $DBName" $'\n'
+
+IFS=""
+COLUMNS=24
 
 choices=(
 "Create new Table"
@@ -13,25 +44,31 @@ choices=(
 "List existing Tables"
 "Back to main menu")
 
-PS3='Enter your choice: '
+PS3=$'\nEnter your choice: '
 
 select choice in ${choices[@]}
 do
 case $REPLY in
 	1) echo "$choice ... "
-	  break;;
+	   ;;
 	2) echo "$choice ... "
-	  break;;
+	   ;;
 	3) echo "$choice ... "
-	  break;;
+	   ;;
 	4) echo "$choice ... "
-	  break;;
+	   ;;
 	5) echo "$choice ... "
-	  break;;
+	   ;;
 	6) echo "$choice ... "
-	  break;;
-	7) exit
-	  break;;
-	*) echo "insert a number from the previous choices"
+	   ;;
+	7) echo "$choice ... "
+	   clear		
+	   break;;
+	*) echo "Insert a number from the previous choices"
 esac
+REPLY=
+echo "Currently working with $1" $'\n'
+COLUMNS=24
 done
+
+fi
