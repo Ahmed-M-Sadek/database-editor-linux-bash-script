@@ -84,11 +84,18 @@ case $REPLY in
 	   source $myDirectory/delete.sh
 	   ;;
 	3) echo "$choice ... "
-          ;;
+           ;;
 	4) echo "$choice ... "
-          ;;
+	   source $myDirectory/list.sh
+           ;;
 	5) echo "$choice ... "
-          ;;
+	   clear
+	   tput cup 10 20;
+	   echo " Au Revoir :'( "
+	   sleep 3
+	   clear
+	   break 
+           ;;
 	*) echo "Wrong choice, try again"
 esac
 REPLY=
