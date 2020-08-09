@@ -89,8 +89,9 @@ mySpace=$(awk -F: '{if(NR == 2){print $2}}' $myDirectory/configFile.txt)
 # ====================================================================
 # USER INTERFACE
 
-echo "Main Menu:"
+echo $'Main Menu:\n'
 IFS=""
+COLUMNS=18
 choices=(
 "Create new DB"
 "Delete DB"
@@ -98,7 +99,7 @@ choices=(
 "List existing DBs"
 "Exit")
 
-PS3='Enter your choice: '
+PS3=$'\nEnter your choice: '
 
 select choice in  ${choices[@]}
 do
@@ -111,6 +112,7 @@ case $REPLY in
 	   source $myDirectory/delete.sh
 	   ;;
 	3) echo "$choice ... "
+	   source $myDirectory/open.sh
            ;;
 	4) echo "$choice ... "
 	   source $myDirectory/list.sh
@@ -128,4 +130,6 @@ case $REPLY in
 	   ;;
 esac
 REPLY=
+echo $'Main Menu:\n'
+COLUMNS=18
 done
