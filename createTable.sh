@@ -9,6 +9,8 @@ choices=(
 #===================================================
 # Creating Table file
 
+cd $1
+
 clear
 echo "Enter a name for the new table"
 read tableName
@@ -30,6 +32,8 @@ do
 done
 echo $cnumber > $tableName
 
+sleep 0.5
+clear
 #===================================================
 # Adding Primary key value and datatype
 
@@ -49,6 +53,8 @@ done
 echo -n "$localtype" >> $tableName
 fields+="$localPK"
 
+sleep 0.5
+clear
 #===================================================
 # Adding the rest of the columns
 
@@ -70,8 +76,13 @@ do
 
 	echo -n ":$localtype" >> $tableName
 	fields+=":$localName"
+
+sleep 0.5
+clear
 done
 
 echo >> $tableName
 echo $fields >> $tableName
 
+cd ..
+echo "Table created"
