@@ -4,7 +4,7 @@ source $myDirectory/essentials.sh
 
 # check for empty directory
 emptyFlag=5
-checkEmptyDirectory $mySpace $flag
+checkEmptyDirectory $mySpace
 
 if [ $emptyFlag -eq 0 ]
 then
