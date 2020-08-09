@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 
 # SHORTCUTS
 
@@ -80,7 +81,8 @@ case $REPLY in
 	   $myDirectory/create.sh $myDirectory
 	   ;;
 	2) echo "$choice ... "
-	  ;;
+	   source $myDirectory/delete.sh
+	   ;;
 	3) echo "$choice ... "
           ;;
 	4) echo "$choice ... "
