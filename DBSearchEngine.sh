@@ -1,22 +1,39 @@
 #!/bin/bash
 clear
 
+# ===================================================================
 # SHORTCUTS
 
 # Working Space Shortcut
-
 mySpace=$(awk -F: '{if(NR == 2){print $2}}' ./configFile.txt)
 
-# Working Directory Shortcut
-
-myDirectory=$(awk -F: '{if(NR == 1){print $2}}' ./configFile.txt)
 # ====================================================================
+# GET WORKING DIRECTORY AND SET DEFAULT WORKING SPACE
+awk -i inplace -F: -v var="$(pwd)" '{if(NR==1){gsub($2,var)};{print $0}}' ./configFile.txt
+
+# Working Directory Shortcut
+myDirectory=$(awk -F: '{if(NR == 1){print $2}}' ./configFile.txt)
+
 # CREATE DEFAULT DIRECTORY
 
 if [ ! -d "./Databases" ]
 then
 mkdir Databases
 fi
+
+if [ ! -d $mySpace ]
+	then
+	awk -i inplace -F: -v var="$(pwd)/Databases" '{if(NR==2){gsub($2,var)};{print $0}}' ./configFile.txt
+fi
+
+# ===================================================================
+# RELOAD SHORTCUTS
+
+# Working Space Shortcut
+
+mySpace=$(awk -F: '{if(NR == 2){print $2}}' ./configFile.txt)
+
+# ====================================================================
 # ====================================================================
 # SET DEFAULT WORKING SPACE
 
@@ -59,6 +76,14 @@ else
 clear
 exit
 fi
+
+# ===================================================================
+# RELOAD SHORTCUTS
+# Working Space Shortcut
+
+mySpace=$(awk -F: '{if(NR == 2){print $2}}' $myDirectory/configFile.txt)
+
+# ====================================================================
 # ====================================================================
 # USER INTERFACE
 
@@ -97,6 +122,8 @@ case $REPLY in
 	   break 
            ;;
 	*) echo "Wrong choice, try again"
+	   clear
+	   ;;
 esac
 REPLY=
 done
