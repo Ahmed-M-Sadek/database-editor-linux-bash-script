@@ -1,4 +1,4 @@
-# bash script for a database management system
+# Database Search Engine
 
 The script offers a basic text based user interface for a DBMS (Database Management System) that gives the user a way to create and interact with database directories and table files
 
@@ -39,3 +39,33 @@ The script is run using the following command if you are in the same directory i
 ```
 
 or you can add the absolute path to script after the " . "
+
+### User Interface
+
+The script starts by asking if the user is willing to use the directory that is save in the configeration file.
+
+If the user enters "N" or "n" it requires the user to type in the path to the new directory which it then saves in the configeration file as the default path for later usage.
+
+### Features
+
+The user is asked to choose from the set of features offered in the main menu by the script.
+
+#### Create a database
+
+#### Delete a database
+
+#### Open a database
+
+##### Create a table
+
+##### Delete a table
+
+##### Insert into a table
+
+##### Modify a table entry
+
+##### Display a table
+
+##### List all available tables
+
+#### List all available databases
