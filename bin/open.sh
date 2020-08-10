@@ -58,8 +58,12 @@ case $REPLY in
 	   source $myDirectory/deleteTable.sh $mySpace/$DBName
 	   ;;
 	3) echo "$choice ... "
+	   sleep 1
+	   source $myDirectory/insertData.sh $mySpace/$DBName
 	   ;;
 	4) echo "$choice ... "
+	   sleep 1
+	   source $myDirectory/ModifyData.sh $mySpace/$DBName
 	   ;;
 	5) echo "$choice ... "
 	   sleep 1
