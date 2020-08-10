@@ -66,6 +66,9 @@ lists available databases and promts the user to enter a name from the list to s
 
 Lists all available databases inside the Databases directory.
 
+============================================================================================================================
+### Opening a database
+
 The features offered when opening a database include:
 
 #### 1) Create a table
