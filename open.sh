@@ -52,6 +52,7 @@ case $REPLY in
 	1) echo "$choice ... "
 	   ;;
 	2) echo "$choice ... "
+	   source $myDirectory/deleteTable.sh $DBName
 	   ;;
 	3) echo "$choice ... "
 	   ;;
@@ -60,11 +61,14 @@ case $REPLY in
 	5) echo "$choice ... "
 	   ;;
 	6) echo "$choice ... "
+	   source $myDirectory/listTable.sh $DBName
 	   ;;
 	7) echo "$choice ... "
-	   clear		
-	   break;;
+	   ;;
 	*) echo "Insert a number from the previous choices"
+	   clear
+	   sleep 1
+	   ;;
 esac
 REPLY=
 echo "Currently working with $1" $'\n'
