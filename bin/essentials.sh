@@ -12,7 +12,7 @@ checkEmptyDirectory() {
 emptyFlag=1
 if [ -z "$(ls -A "$1")" ]
 then
-echo "You don't have any databases yet"
+echo "You don't have any $2 yet"
 sleep 2
 clear
 else

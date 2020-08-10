@@ -3,35 +3,34 @@
 source $myDirectory/essentials.sh
 
 emptyFlag=5
-checkEmptyDirectory $1
-
-cd $mySpace/$1
+checkEmptyDirectory $1 "tables"
 
 if [ $emptyFlag -eq 0 ]
 then
-titleString=" Existin Tables are: "
+myString=" Existing Tables are: "
 printInSquare $myString ${#myString}
 tput setaf 4
 tput bold
-ls -1
+ls -1 $1
 tput sgr0
-echo "Kindly enter Table to be DELETED: "
+echo "Kindly enter the table to be DELETED: "
 tput sc
 read deletedTable
 flag=1
 	while [ $flag -eq 1 ]
 	do
-		if [ -f $deletedTable ]
+		if [ -f $1/$deletedTable ]
 		then
 		flag=0
 		clear
-		tmp=$PS3
-		PS3='Kindly Enter your option: '
+		tmp="Confirm table deletion"
+		PS3=$'\nKindly Enter your option: '
+		echo "$tmp" $'\n'
 		select choice in Confirm Cancel
 		do
 		case $REPLY in
 			1) echo "$deletedTable deletion confirmed ..."
-			   rm $deletedTable
+			   rm $1/$deletedTable
 			   tput cup 10 20
 			   echo "$deletedTable Table has been deleted successfully"
 			   sleep 1
@@ -45,8 +44,10 @@ flag=1
 			   clear
 			   ;;
 		esac
-		PS3=$tmp
+		
 		REPLY=
+		echo "$tmp" $'\n'
+		
 		done
 		else
 		echo " '$deletedTable ' Table doesn't exist!"
@@ -58,4 +59,3 @@ flag=1
 		fi
 	done
 fi
-cd ..

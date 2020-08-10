@@ -2,7 +2,7 @@
 
 source $myDirectory/essentials.sh
 emptyflag=5
-checkEmptyDirectory $mySpace
+checkEmptyDirectory $mySpace "databases"
 
 if [ $emptyFlag -eq 0 ]
 then
@@ -30,7 +30,7 @@ done
 
 clear
 
-echo "Currently working with $DBName" $'\n'
+echo "Currently you are working with ' $DBName ' database" $'\n'
 
 IFS=""
 COLUMNS=24
@@ -50,30 +50,33 @@ select choice in ${choices[@]}
 do
 case $REPLY in
 	1) echo "$choice ... "
-	   source $myDirectory/createTable.sh $DBName
+	   sleep 1
+	   source $myDirectory/createTable.sh $mySpace/$DBName
 	   ;;
 	2) echo "$choice ... "
-	   source $myDirectory/deleteTable.sh $DBName
+	   sleep 1
+	   source $myDirectory/deleteTable.sh $mySpace/$DBName
 	   ;;
 	3) echo "$choice ... "
 	   ;;
 	4) echo "$choice ... "
 	   ;;
 	5) echo "$choice ... "
+	   sleep 1
 	   source $myDirectory/displayTable.sh $DBName
 	   ;;
 	6) echo "$choice ... "
+	   sleep 1
 	   source $myDirectory/listTable.sh $DBName
 	   ;;
 	7) echo "$choice ... "
-	   ;;
+	   clear		
+	   break;;
 	*) echo "Insert a number from the previous choices"
-	   clear
-	   sleep 1
-	   ;;
 esac
+clear
 REPLY=
-echo "Currently working with $1" $'\n'
+echo "Currently you are working with ' $DBName ' database" $'\n'
 COLUMNS=24
 done
 

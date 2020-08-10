@@ -5,8 +5,7 @@ source $myDirectory/essentials.sh
 
 emptyFlag=5
 
-checkEmptyDirectory $1
-cd $mySpace/$1
+checkEmptyDirectory $mySpace/$1
 
 #List available tables in the directory if not empty
 
@@ -16,9 +15,9 @@ titleString=" Existing Tables are: "
 printInSquare $titleString ${#titleString}
 tput setaf 4
 tput bold
-ls -1
+ls -1 $mySpace/$1
 tput sgr0
-echo "Choose a Table to display its contents"
+echo "Choose a Table to display its content"
 tput sc
 read tableName
 flag=1
@@ -27,11 +26,12 @@ flag=1
 
 while [ $flag -eq 1 ]
 do
-	if [ -f $tableName ]
+	if [ -f $mySpace/$1/$tableName ]
 	then
 	flag=0
 	clear
-	sed '1,2d' $tableName | column -t -s ":"	#display useful table contents in column format
+	sed '1,2d' $mySpace/$1/$tableName | column -t -s ":"	
+	#display useful table contents in column format
 
 	else
 	echo " '$tableName ' Table doesn't exist!"
@@ -46,4 +46,3 @@ fi
 echo 'Press any button to continue'
 read
 clear
-cd ..

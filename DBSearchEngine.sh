@@ -1,8 +1,10 @@
 #!/bin/bash
+
 clear
 
 cd $(dirname $(realpath $0))
 
+# ===================================================================
 # ===================================================================
 # SHORTCUTS
 
@@ -11,7 +13,7 @@ mySpace=$(awk -F: '{if(NR == 2){print $2}}' ./configFile.txt)
 
 # ====================================================================
 # GET WORKING DIRECTORY AND SET DEFAULT WORKING SPACE
-awk -i inplace -F: -v var="$(pwd)" '{if(NR==1){gsub($2,var)};{print $0}}' ./configFile.txt
+awk -i inplace -F: -v var="$(pwd)/bin" '{if(NR==1){gsub($2,var)};{print $0}}' ./configFile.txt
 
 # Working Directory Shortcut
 myDirectory=$(awk -F: '{if(NR == 1){print $2}}' ./configFile.txt)
@@ -83,7 +85,7 @@ fi
 # RELOAD SHORTCUTS
 # Working Space Shortcut
 
-mySpace=$(awk -F: '{if(NR == 2){print $2}}' $myDirectory/configFile.txt)
+mySpace=$(awk -F: '{if(NR == 2){print $2}}' $myDirectory/../configFile.txt)
 
 # ====================================================================
 # ====================================================================
@@ -130,6 +132,7 @@ case $REPLY in
 	   ;;
 esac
 REPLY=
+PS3=$'\nEnter your choice: '
 echo $'Main Menu:\n'
 COLUMNS=18
 done

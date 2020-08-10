@@ -4,7 +4,7 @@ source $myDirectory/essentials.sh
 
 # check for empty directory
 emptyFlag=5
-checkEmptyDirectory $mySpace 
+checkEmptyDirectory $mySpace  "databases"
 
 if [ $emptyFlag -eq 0 ]
 then
@@ -20,11 +20,12 @@ read deletedDB
 flag=1
 	while [ $flag -eq 1 ]
 	do
-		if [ -d $deletedDB ]
+		if [ -d $mySpace/$deletedDB ]
 		then
 		flag=0
 		clear
 		PS3='Kindly Enter your option: '
+		echo "Are you sure you want to delete it?"
 		select choice in Confirm Cancel 
 		do
 		case $REPLY in
@@ -44,6 +45,7 @@ flag=1
 			   ;;
 		esac
 		REPLY=
+		echo "Are you sure you want to delete it?"
 		done
 		else
 		echo " ' $deletedDB ' DB doesn't exist!"

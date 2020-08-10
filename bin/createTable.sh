@@ -9,15 +9,30 @@ choices=(
 #===================================================
 # Creating Table file
 
-cd $1
 
 clear
-echo "Enter a name for the new table"
+echo "Enter a name for the new table: "
+tput sc
 read tableName
 sleep 0.5
+
+
+until [ ! -f $1/$tableName ]
+do
+
+	echo "Table already exists!"
+	sleep 1
+	tput rc
+	tput ed
+	read tableName
+
+done
+
+touch $1/$tableName
+
 clear
 
-touch $tableName
+echo "Now you are working with ' $tableName ' table." $'\n'
 
 #===================================================
 # Checking number of table columns
@@ -25,15 +40,18 @@ touch $tableName
 echo "Enter the number of columns"
 read cnumber
 
-while [[ $cnumber =~ '!(^[0-9]+)' || $cnumber -lt 1 ]]
+while [[ $cnumber =~ '!(^[0-9]+)' || $cnumber -lt 2 ]]
 do
-	echo "PLease enter a number of columns"
+	tput cup 2 0
+	tput ed
+	echo "PLease enter the number of columns"
 	read cnumber
 done
-echo $cnumber > $tableName
+echo $cnumber > $1/$tableName
 
 sleep 0.5
-clear
+tput cup 2 0
+tput ed
 #===================================================
 # Adding Primary key value and datatype
 
@@ -50,11 +68,12 @@ case $REPLY in
 esac
 done
 
-echo -n "$localtype" >> $tableName
+echo -n "$localtype" >> $1/$tableName
 fields+="$localPK"
 
 sleep 0.5
-clear
+tput cup 2 0
+tput ed
 #===================================================
 # Adding the rest of the columns
 
@@ -74,15 +93,17 @@ do
 	esac
 	done
 
-	echo -n ":$localtype" >> $tableName
+	echo -n ":$localtype" >> $1/$tableName
 	fields+=":$localName"
 
 sleep 0.5
 clear
 done
 
-echo >> $tableName
-echo $fields >> $tableName
+echo >> $1/$tableName
+echo $fields >> $1/$tableName
 
-cd ..
+tput cup 10 20
 echo "Table created"
+sleep 1
+clear
