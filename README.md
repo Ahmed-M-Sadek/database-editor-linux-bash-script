@@ -66,36 +66,36 @@ lists available databases and promts the user to enter a name from the list to s
 
 Lists all available databases inside the Databases directory.
 
-============================================================================================================================
-### Opening a database
+
+## Opening a database
 
 The features offered when opening a database include:
 
-#### 1) Create a table
+### 1) Create a table
 
 Creates and names a new table file.
 Then asks for the number of columns, names and datatypes for each of the columns.
 The first column must be the Primary key of the table.
 
-#### 2) Delete a table
+### 2) Delete a table
 
 Lists available tables and prompts the user to enter the name of the table to be deleted
 
-#### 3) Insert into a table
+### 3) Insert into a table
 
 Lists available tables and prompts the user to enter the name of the table.
 Then requires the user to enter a unique value for the primary key and then proceeds to request the data for the other columns.
 
-#### 4) Modify a table entry
+### 4) Modify a table entry
 
 Lists available tables and prompts the user to enter the name of the table.
 The user then enters an existing primary key and enters new values for the entry with that primary key.
 
-#### 5) Display a table
+### 5) Display a table
 
 Lists available tables and prompts the user to enter the name of the table.
 Then it displays the table in column format so the user can view it easily.
 
-#### 6) List all available tables
+### 6) List all available tables
 
 Lists all available tables in the opened database.
