@@ -1,2 +1,2 @@
-Current Working Directory:/home/yara/DBSearchEngine
-Current Working Space:/home/yara/DBSearchEngine/Databases
+Current Working Directory:/home/strykar/Project/database-editor-linux-script/bin
+Current Working Space:/home/strykar/Project/database-editor-linux-script/Databases

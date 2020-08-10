@@ -1,21 +1,43 @@
 #!/bin/bash
 
+clear
+
+cd $(dirname $(realpath $0))
+
+# ===================================================================
+# ===================================================================
 # SHORTCUTS
 
 # Working Space Shortcut
-
 mySpace=$(awk -F: '{if(NR == 2){print $2}}' ./configFile.txt)
 
-# Working Directory Shortcut
-
-myDirectory=$(awk -F: '{if(NR == 1){print $2}}' ./configFile.txt)
 # ====================================================================
-# CREAT DEAFULT DIRECTORY
+# GET WORKING DIRECTORY AND SET DEFAULT WORKING SPACE
+awk -i inplace -F: -v var="$(pwd)/bin" '{if(NR==1){gsub($2,var)};{print $0}}' ./configFile.txt
+
+# Working Directory Shortcut
+myDirectory=$(awk -F: '{if(NR == 1){print $2}}' ./configFile.txt)
+
+# CREATE DEFAULT DIRECTORY
 
 if [ ! -d "./Databases" ]
 then
 mkdir Databases
 fi
+
+if [ ! -d $mySpace ]
+	then
+	awk -i inplace -F: -v var="$(pwd)/Databases" '{if(NR==2){gsub($2,var)};{print $0}}' ./configFile.txt
+fi
+
+# ===================================================================
+# RELOAD SHORTCUTS
+
+# Working Space Shortcut
+
+mySpace=$(awk -F: '{if(NR == 2){print $2}}' ./configFile.txt)
+
+# ====================================================================
 # ====================================================================
 # SET DEFAULT WORKING SPACE
 
@@ -58,31 +80,59 @@ else
 clear
 exit
 fi
+
+# ===================================================================
+# RELOAD SHORTCUTS
+# Working Space Shortcut
+
+mySpace=$(awk -F: '{if(NR == 2){print $2}}' $myDirectory/../configFile.txt)
+
+# ====================================================================
 # ====================================================================
 # USER INTERFACE
 
-echo "Main Menu:"
+echo $'Main Menu:\n'
 IFS=""
+COLUMNS=18
 choices=(
 "Create new DB"
 "Delete DB"
 "Open DB"
 "List existing DBs"
 "Exit")
-PS3='Enter your choice: '
+
+PS3=$'\nEnter your choice: '
+
 select choice in  ${choices[@]}
 do
 case $REPLY in
 	1) echo "$choice ... "
-	   break;;
+	   sleep 1
+	   $myDirectory/create.sh $myDirectory
+	   ;;
 	2) echo "$choice ... "
-	  break;;
+	   source $myDirectory/delete.sh
+	   ;;
 	3) echo "$choice ... "
-          break;;
+	   source $myDirectory/open.sh
+           ;;
 	4) echo "$choice ... "
-          break;;
+	   source $myDirectory/list.sh
+           ;;
 	5) echo "$choice ... "
-          break;;
+	   clear
+	   tput cup 10 20;
+	   echo " Au Revoir :'( "
+	   sleep 3
+	   clear
+	   break 
+           ;;
 	*) echo "Wrong choice, try again"
+	   clear
+	   ;;
 esac
+REPLY=
+PS3=$'\nEnter your choice: '
+echo $'Main Menu:\n'
+COLUMNS=18
 done
