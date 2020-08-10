@@ -50,6 +50,7 @@ select choice in ${choices[@]}
 do
 case $REPLY in
 	1) echo "$choice ... "
+	   source $myDirectory/createTable.sh $DBName
 	   ;;
 	2) echo "$choice ... "
 	   source $myDirectory/deleteTable.sh $DBName
@@ -59,6 +60,7 @@ case $REPLY in
 	4) echo "$choice ... "
 	   ;;
 	5) echo "$choice ... "
+	   source $myDirectory/displayTable.sh $DBName
 	   ;;
 	6) echo "$choice ... "
 	   source $myDirectory/listTable.sh $DBName
