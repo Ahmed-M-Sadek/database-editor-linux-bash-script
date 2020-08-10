@@ -46,26 +46,53 @@ The script starts by asking if the user is willing to use the directory that is 
 
 If the user enters "N" or "n" it requires the user to type in the path to the new directory which it then saves in the configeration file as the default path for later usage.
 
-### Features
+## Features
 
 The user is asked to choose from the set of features offered in the main menu by the script.
 
-#### Create a database
+### Create a database
 
-#### Delete a database
+allows the user to create and name a new database directory.
 
-#### Open a database
+### Delete a database
 
-##### Create a table
+lists available databases and prompts the user to enter a name from the list to delete the database with that name.
 
-##### Delete a table
+### Open a database
 
-##### Insert into a table
+lists available databases and promts the user to enter a name from the list to show the features offered for that database.
 
-##### Modify a table entry
+### List all available databases
 
-##### Display a table
+Lists all available databases inside the Databases directory.
 
-##### List all available tables
+The features offered when opening a database include:
 
-#### List all available databases
+#### 1) Create a table
+
+Creates and names a new table file.
+Then asks for the number of columns, names and datatypes for each of the columns.
+The first column must be the Primary key of the table.
+
+#### 2) Delete a table
+
+Lists available tables and prompts the user to enter the name of the table to be deleted
+
+#### 3) Insert into a table
+
+Lists available tables and prompts the user to enter the name of the table.
+Then requires the user to enter a unique value for the primary key and then proceeds to request the data for the other columns.
+
+#### 4) Modify a table entry
+
+Lists available tables and prompts the user to enter the name of the table.
+The user then enters an existing primary key and enters new values for the entry with that primary key.
+
+#### 5) Display a table
+
+Lists available tables and prompts the user to enter the name of the table.
+Then it displays the table in column format so the user can view it easily.
+
+#### 6) List all available tables
+
+Lists all available tables in the opened database.
