@@ -42,7 +42,7 @@ do
 	read tableName
 	fi
 done
-fi
-echo 'Press any button to continue'
+echo $'\nPress any button to continue'
 read
+fi
 clear
