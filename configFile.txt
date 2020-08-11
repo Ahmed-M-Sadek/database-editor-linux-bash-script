@@ -1,2 +1,0 @@
-Current Working Directory:/home/strykar/Project/database-editor-linux-script/bin
-Current Working Space:/home/strykar/Project/database-editor-linux-script/Databases

@@ -57,6 +57,7 @@ tput ed
 
 echo "Enter the primary key for the database"
 read localPK
+echo $'\n' "Enter field type for column $localPK:" 
 select choice in ${choices[@]}
 do
 case $REPLY in
@@ -66,6 +67,8 @@ case $REPLY in
           break;;
 	*) echo "Wrong choice"
 esac
+REPLY=
+echo $'\n' "Enter field type for column $localPK:"
 done
 
 echo -n "$localtype" >> $1/$tableName
@@ -79,9 +82,9 @@ tput ed
 
 for (( i=2; i<=$cnumber; i++ ))
 do
-	echo "Enter field name"
+	echo "Enter field name for column $i:"
 	read localName
-	echo "Enter field type for column $localName:"
+	echo $'\n' "Enter field type for column $localName:" 
 	select choice in ${choices[@]}
 	do
 	case $REPLY in
@@ -91,19 +94,22 @@ do
 		  break;;
 		*) echo "Wrong choice, choose again"
 	esac
+	REPLY=
+	echo $'\n' "Enter field type for column $localName:"
 	done
 
 	echo -n ":$localtype" >> $1/$tableName
 	fields+=":$localName"
 
 sleep 0.5
-clear
+tput cup 2 0
+tput ed
 done
 
 echo >> $1/$tableName
 echo $fields >> $1/$tableName
 
 tput cup 10 20
-echo "Table created"
+echo "Table $tableName has been created"
 sleep 1
 clear
