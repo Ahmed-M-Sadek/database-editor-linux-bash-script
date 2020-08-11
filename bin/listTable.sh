@@ -3,7 +3,7 @@
 source $myDirectory/essentials.sh
 
 emptyFlag=5
-checkEmptyDirectory $mySpace/$1
+checkEmptyDirectory $mySpace/$1 "tables"
 
 if [ $emptyFlag -eq 0 ]
 then

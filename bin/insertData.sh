@@ -3,7 +3,7 @@
 source $myDirectory/essentials.sh
 
 emptyFlag=5
-checkEmptyDirectory $1
+checkEmptyDirectory $1 "tables"
 
 if [ $emptyFlag -eq 0 ]
 then
@@ -13,7 +13,7 @@ tput setaf 4
 tput bold
 ls -1 $1
 tput sgr0
-echo "Choose a Table to display its content"
+echo "Kindly enter a Table name to insert into:"
 tput sc
 read tableName
 flag=1
@@ -35,7 +35,8 @@ do
         read tableName
         fi
 done
-fi
+
+echo "Now you are going to insert into ' $tableName ' Table" $'\n'
 
 dataTypes=$(awk 'NR==2' $1/$tableName)
 fieldNames=$(awk 'NR==3' $1/$tableName)
@@ -46,48 +47,116 @@ IFS=':' read -r -a names <<<"$fieldNames"
 
 for index in "${!types[@]}"
 do
-clear
+tput cup 2 0
+tput ed
 	if [ $index -gt 0 ]
 	then
 		if [ "${types[index]}" = "n" ]
 		then
 			echo "Please enter an Integer for the field ${names[index]}"
 			read localInteger
-			while ! [[ "$localInteger" =~ ^-?[0-9]+$ ]]
-			do
-				clear
-				echo "Please Enter an Integer value only"
-				read localInteger
-			done
+				while ! [[ "$localInteger" =~ ^-?[0-9]+$ ]]
+				do
+					tput cup 2 0
+					tput ed
+					echo "Please Enter an Integer value only"
+					read localInteger
+				done
 			inputString+=":$localInteger"
-			clear
+			tput cup 2 0
+			tput ed
 		else
                 echo "Please enter a string for the field ${names[index]}"
-                read localString
+                tput sc
+		read localString
+			until [[ $localString =~ ^[A-Za-z] ]]
+			do
+			echo "Please enter a string!"
+			tput rc
+			tput ed 
+			read localString
+			done
 		inputString+=":$localString"
-                clear
+		tput cup 2 0
+		tput ed
 		fi
 	else
+		tmp=$(awk -F: '{if(NR > 3) print $1}' "$1/$tableName")
                 if [ "${types[index]}" = "n" ]
                 then
                         echo "Please enter an Integer for the Primary Key: ${names[index]}"
+                        tput sc
                         read localInteger
-			tmp=($(awk -v localInteger="$localInteger" -F: '{ if(NR > 3) print $1}' $1/$tableName))
-                        while ! [[ "$localInteger" =~ ^-?[0-9]+$ ]] || [[ "${tmp[@]}" =~ "${localInteger}" ]]
-			do
-				clear
-                                echo "Please Enter a unique Integer value only"
-                                read localInteger
+			 
+			 great=1
+                        until [ $great -eq 0 ] 
+			 do
+			        if ! [[ "$localInteger" =~ ^-?[0-9]+$ ]]
+				then
+                               echo "Please Enter an Integer value ! "
+                               great=1
+                               else
+                               great=0
+                               fi
+                               
+                               if [[ "${tmp[*]}" =~ (^|[[:space:]])"${localInteger}"($|[[:space:]]) ]]
+                               then
+                               echo "The P.K. value needs to be unique!"
+                               great=1
+                               else
+                               great=$((($great)|0))
+                               fi
+                               
+                               if [ $great -eq 1 ]
+		               then
+		               sleep 1
+				tput rc
+				tput ed 
+				read localInteger
+				fi
+                               
 			 done
 			inputString+="$localInteger"
 
                 else
                 echo "Please enter a string for the field ${names[index]}"
-                read localString
+                tput sc
+		read localString
+			great=1
+			until [ $great -eq 0 ] 
+			do
+			if ! [[ $localString =~ ^[A-Za-z] ]]
+			then
+			echo "Please enter a string!"
+			great=1
+			else
+			great=0
+			fi
+			
+			if [[ "${tmp[*]}" =~ (^|[[:space:]])"${localString}"($|[[:space:]]) ]]
+                       then
+                       echo "The P.K. value needs to be unique!"
+                       great=1
+                       else
+                       great=$((($great)|0))
+                       fi
+                       
+                       if [ $great -eq 1 ]
+                       then
+                       sleep 1
+			tput rc
+			tput ed 
+			read localString
+			fi
+			
+			done
 		inputString+="$localString"
-                clear
-                fi
+		tput cup 2 0
+		tput ed
+		fi
 
 	fi
 done
 echo "$inputString" >> $1/$tableName
+clear
+fi

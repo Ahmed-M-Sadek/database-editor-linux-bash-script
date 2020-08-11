@@ -3,7 +3,7 @@
 source $myDirectory/essentials.sh
 
 emptyFlag=5
-checkEmptyDirectory $1
+checkEmptyDirectory $1 "tables"
 
 if [ $emptyFlag -eq 0 ]
 then
@@ -13,7 +13,7 @@ tput setaf 4
 tput bold
 ls -1 $1
 tput sgr0
-echo "Choose a Table to modify its content"
+echo "Choose a Table to modify its content: "
 tput sc
 read tableName
 flag=1
@@ -31,57 +31,68 @@ do
         sleep 2
         tput rc
         tput ed
-        tput sc
         read tableName
         fi
 done
-fi
 
-dataTypes=$(awk 'NR==2' $1/$tableName)
-fieldNames=$(awk 'NR==3' $1/$tableName)
-inputString=""
+# ==========================================================
 
-IFS=':' read -r -a types <<<"$dataTypes"
-IFS=':' read -r -a names <<<"$fieldNames"
+tmp=($(awk -F: '{ if(NR > 3) print $1}' "$1/$tableName"))
 
-tmp=($(awk -v localValue="$localValue" -F: '{ if(NR > 3) print $1}' $1/$tableName))
+echo "Kindly Enter your PK value: "
+tput sc
+read myPK
 
-echo "PLease enter the primary key value of the entry yo be modified"
-read localValue
-tmp=($(awk -v localValue="$localValue" -F: '{ if(NR > 3) print $1}' $1/$tableName))
-
-while ! [[ "${tmp[@]}" =~ "${localValue}" ]]
+until [[ "${tmp[*]}" =~ (^|[[:space:]])"${myPK}"($|[[:space:]]) ]]
 do
-	echo "Please enter a value from the table's primary keys entries"
-	read localValue
+echo "This PK doesn't exist!" 
+sleep 1
+tput rc
+tput ed
+read myPK
 done
 
-for localindex in "${!types[@]}"
+# ===========================================================
+
+source $myDirectory/modifyFns.sh
+
+echo $'\n'
+IFS=""
+choices=(
+"Delete the whole record containing this PK value?"
+"Modify a specific cell in this record?"
+"Back to previous menu")
+
+PS3=$'\nKindly enter your option: '
+
+select choice in  ${choices[@]}
 do
-echo $localindex
+case $REPLY in
+	1) echo "$choice ... "
+	   sleep 1
+	   deleteRecord $myPK $1/$tableName
+	   break;
+	   ;;
+	2) echo "$choice ... "
+	   sleep 1
+	   modifyCell $myPK $1/$tableName
+	   ;;
+	3) echo "$choice ... "
+   	   clear		
+   	   break;;
+	*) echo "Wrong choice, try again"
+	   sleep 1
+	   clear
+	   ;;
+esac
 clear
-if [ $localindex -gt 0 ]
-then
-	if [ "${types[localindex]}" = "n" ]
-        then
-                        echo "Please enter an Integer for the field ${names[localindex]}"
-                        read localInteger
-                        while ! [[ "$localInteger" =~ ^-?[0-9]+$ ]]
-                        do
-                                clear
-                                echo "Please Enter an Integer value only"
-                                read localInteger
-                        done
-                        inputString+=":$localInteger"
-                        clear
-	else
-                echo "Please enter a string for the field ${names[localindex]}"
-                read localString
-        	inputString+=":$localString"
-        	clear
-	fi
-fi
+REPLY=
+PS3=$'\nKindly enter your option: '
+echo "You are working with PK = '$myPK'" $'\n'
 done
-inputString="$localValue""$inputString"
 
-sed -i "s/^$localValue.*/$inputString/" $1/$tableName
+# =============================================================
+
+fi
+
+
