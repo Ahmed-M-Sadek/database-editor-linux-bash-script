@@ -4,7 +4,7 @@ The script offers a basic text based user interface for a DBMS (Database Managem
 
 ## Requirements
 
-The script only requires the gawk package which can be installed easily using
+The script only requires the gawk package which can be installed easily using:
 
 ```bash
 sudo apt install gawk
@@ -13,7 +13,7 @@ sudo apt install gawk
 ## Preparation
 
 Make sure you have the correct permissions to run the main script, The other sub-scripts used grant permission automatically and you don't have to set permissions.
-This can be done through the following command
+This can be done through the following command.
 
 ```bash
 chmod a+x DBSearchEngine.sh
@@ -23,7 +23,8 @@ In case the script does not set the permissions correctly there are two options:
 #### 1) Use the changePermissions.sh script
 #### 2) Set the permissions manually 
 
-It is also preferrable to set the working space before hand in the configeration file "configFile.txt"
+It is also preferrable to set the working space before hand in the configeration file "configFile.txt".
+
 In case you already have a Databases DIrectory: set the working space to the Databases directory.
 You can also set the working space directory to an empty directory in order to create a new Databases directory in that path.
 
