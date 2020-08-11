@@ -14,7 +14,7 @@ tput setaf 4
 tput bold
 ls -1 $mySpace
 tput sgr0
-echo "Press any key to go back"
+echo "Press ENTER to go back"
 read
 clear
 fi

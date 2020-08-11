@@ -1,0 +1,2 @@
+Current Working Directory:/home/yara/Downloads/database-editor-linux-bash-script-master/bin
+Current Working Space:/home/yara/Downloads/database-editor-linux-bash-script-master/Databases
