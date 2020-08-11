@@ -18,10 +18,15 @@ This can be done through the following command
 ```bash
 chmod a+x DBSearchEngine.sh
 ```
+In case the script does not set the permissions correctly there are two options:
+
+### 1) Use the changePermissions.sh script
+### 2) Set the permissions manually 
 
 It is also preferrable to set the working directory before hand in the configeration file "configFile.txt"
 make sure that you set the working directory as the bin directory this ensures the script to find the requires built-in sub-scripts which it uses to complete its required functionalitites 
-In case you already have a Databases DIrectory: set the working space to the Databases directory
+In case you already have a Databases DIrectory: set the working space to the Databases directory.
+You can also set the working space directory to an empty directory in order to create a new Databases directory in that path.
 
 Here is an example for the configFile.txt
 
@@ -29,7 +34,7 @@ Here is an example for the configFile.txt
 Current Working Directory:/home/userName/optionalDirectory/bin
 Current Working Space:/home/userName/optionalDirectory/Databases
 ```
-
+:warning: Do not set or change the working directory path. It should be set automatically.
 ## Usage
 
 The script is run using the following command if you are in the same directory in which the script is located
