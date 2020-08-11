@@ -1,10 +1,10 @@
 # Database Search Engine
 
-The script offers a basic text based user interface for a DBMS (Database Management System) that gives the user a way to create and interact with database directories and table files
+The script offers a basic terminal-based user interface for a DBMS (Database Management System) that gives the user a way to create and interact with database directories and table files
 
 ## Requirements
 
-The script only requires the gawk package which can be installed easily using
+The script only requires the "gawk" package which can be installed easily using:
 
 ```bash
 sudo apt install gawk
