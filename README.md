@@ -17,6 +17,7 @@ This can be done through the following command.
 
 ```bash
 chmod a+x DBSearchEngine.sh
+chmod a+x changePermissions.sh
 ```
 In case the script does not set the permissions correctly there are two options:
 
