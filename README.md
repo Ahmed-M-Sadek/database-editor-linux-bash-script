@@ -20,8 +20,8 @@ chmod a+x DBSearchEngine.sh
 ```
 In case the script does not set the permissions correctly there are two options:
 
-### 1) Use the changePermissions.sh script
-### 2) Set the permissions manually 
+#### 1) Use the changePermissions.sh script
+#### 2) Set the permissions manually 
 
 It is also preferrable to set the working directory before hand in the configeration file "configFile.txt"
 make sure that you set the working directory as the bin directory this ensures the script to find the requires built-in sub-scripts which it uses to complete its required functionalitites 
