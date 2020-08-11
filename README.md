@@ -23,8 +23,7 @@ In case the script does not set the permissions correctly there are two options:
 #### 1) Use the changePermissions.sh script
 #### 2) Set the permissions manually 
 
-It is also preferrable to set the working directory before hand in the configeration file "configFile.txt"
-make sure that you set the working directory as the bin directory this ensures the script to find the requires built-in sub-scripts which it uses to complete its required functionalitites 
+It is also preferrable to set the working space before hand in the configeration file "configFile.txt"
 In case you already have a Databases DIrectory: set the working space to the Databases directory.
 You can also set the working space directory to an empty directory in order to create a new Databases directory in that path.
 
